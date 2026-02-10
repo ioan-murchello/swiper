@@ -46,7 +46,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-httpServer.listen(PORT, () => {
-  console.log("Server started at this port:" + PORT);
+httpServer.listen(PORT, () => { 
   connectDB();
 });
