@@ -72,8 +72,7 @@ export const signup = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
-    // await newUser.save();
+    }); 
     res.status(201).json({ success: true, user: newUser });
   } catch (error) {
     console.log("error in signup controller", error.message);

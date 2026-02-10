@@ -48,6 +48,6 @@ app.use("/api/messages", messageRoutes);
 
 const serverPort = parseInt(PORT, 10) || 5001;
 
-httpServer.listen(serverPort, "0.0.0.0", () => {
+httpServer.listen(serverPort, () => {
   connectDB();
 });
