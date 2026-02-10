@@ -41,11 +41,13 @@ app.use("/api/messages", messageRoutes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/dist")));
 
-  app.get((req, res) => {
+  app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
   });
 }
 
-httpServer.listen(PORT, () => { 
+const serverPort = parseInt(PORT, 10) || 5001;
+
+httpServer.listen(serverPort, "0.0.0.0", () => {
   connectDB();
 });
