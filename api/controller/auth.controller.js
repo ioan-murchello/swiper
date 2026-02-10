@@ -24,7 +24,7 @@ export const login = async (req, res) => {
     res.cookie("jwt", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
     res.json({ message: "Login successful", user });
@@ -70,7 +70,7 @@ export const signup = async (req, res) => {
     res.cookie("jwt", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
     // await newUser.save();
@@ -86,17 +86,4 @@ export const logout = (req, res) => {
   res.json({ message: "Logged out successfully" });
 };
 
-// export const getMe = (req, res) => {
-//   if (!req.user) {
-//     return res.status(401).json({
-//       success: false,
-//       message: "Not authenticated",
-//     });
-//   }
-
-//   res.json({
-//     success: true,
-//     user: req.user,
-//   });
-// };
-
+ 
