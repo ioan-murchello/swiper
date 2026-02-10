@@ -57,6 +57,5 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  // Ensure you are returning a NEW object reference
 setAuthUser: (user) => set({ authUser: user ? { ...user } : null }),
 }));
