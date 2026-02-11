@@ -33,7 +33,7 @@ app.use(
   }),
 );
 
-  app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/matches", matchRoutes);
 app.use("/api/messages", messageRoutes);
@@ -48,6 +48,6 @@ app.use("/api/messages", messageRoutes);
 
 const serverPort = parseInt(PORT, 10) || 5001;
 
-httpServer.listen(serverPort, () => {
+httpServer.listen(serverPort, "0.0.0.0", () => {
   connectDB();
 });

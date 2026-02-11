@@ -11,7 +11,7 @@ export const useAuthStore = create((set) => ({
   signup: async (signupData) => {
     try {
       set({ loading: true });
-      const res = await axios.post("/auth/signup", signupData);
+      const res = await axios.post("/api/auth/signup", signupData);
       set({ authUser: res.data.user });
       initializeSocket(res.data.user._id);
 
@@ -25,7 +25,7 @@ export const useAuthStore = create((set) => ({
   login: async (loginData) => {
     try {
       set({ loading: true });
-      const res = await axios.post("/auth/login", loginData);
+      const res = await axios.post("/api/auth/login", loginData);
       set({ authUser: res.data?.user });
       initializeSocket(res.data.user._id);
       toast.success("Logged in successfully");
@@ -37,7 +37,7 @@ export const useAuthStore = create((set) => ({
   },
   logout: async () => {
     try {
-      const res = await axios.post("/auth/logout");
+      const res = await axios.post("/api/auth/logout");
       disconnectSocket();
       if (res.status === 200) set({ authUser: null });
     } catch (error) {
@@ -46,7 +46,7 @@ export const useAuthStore = create((set) => ({
   },
   checkAuth: async () => {
     try {
-      const res = await axios.get("/auth/me");
+      const res = await axios.get("/api/auth/me");
       initializeSocket(res.data.user._id);
       set({ authUser: res.data.user });
     } catch (error) {
