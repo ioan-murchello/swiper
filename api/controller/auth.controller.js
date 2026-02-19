@@ -26,6 +26,7 @@ export const login = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      path: "/", // Ensure this matches where the cookie is read on the client
     });
     res.json({ message: "Login successful", user });
   } catch (error) {
@@ -72,6 +73,7 @@ export const signup = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      path: "/", // Ensure this matches where the cookie is read on the client
     }); 
     res.status(201).json({ success: true, user: newUser });
   } catch (error) {
@@ -81,7 +83,12 @@ export const signup = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.clearCookie("jwt");
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    path: "/", // Ensure this matches where the cookie was set
+  });
   res.json({ message: "Logged out successfully" });
 };
 

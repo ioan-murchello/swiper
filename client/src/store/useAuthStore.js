@@ -17,7 +17,7 @@ export const useAuthStore = create((set) => ({
 
       toast.success("Account created successfully");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong");
+      toast.error(error.response?.data?.message || "Something went wrong", { id: "signup-error" });
     } finally {
       set({ loading: false });
     }
@@ -30,7 +30,7 @@ export const useAuthStore = create((set) => ({
       initializeSocket(res.data.user._id);
       toast.success("Logged in successfully");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong");
+      toast.error(error.response?.data?.message || "Something went wrong", { id: "login-error" });
     } finally {
       set({ loading: false });
     }
@@ -41,7 +41,7 @@ export const useAuthStore = create((set) => ({
       disconnectSocket();
       if (res.status === 200) set({ authUser: null });
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong");
+      toast.error(error.response?.data?.message || "Something went wrong", { id: "logout-error" });
     }
   },
   checkAuth: async () => {
