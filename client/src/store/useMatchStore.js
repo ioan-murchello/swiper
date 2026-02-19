@@ -14,7 +14,7 @@ export const useMatchStore = create((set) => ({
   getMyMatches: async () => {
     try {
       set({ isLoadingMyMatches: true });
-      const res = await axios.get("/matches");
+      const res = await axios.get("/api/matches");
       set({ matches: res.data.matches });
     } catch (error) {
       set({ matches: [] });
@@ -27,7 +27,7 @@ export const useMatchStore = create((set) => ({
   getUserProfiles: async () => {
     try {
       set({ isLoadingUserProfiles: true });
-      const res = await axios.get("/matches/user-profiles");
+      const res = await axios.get("/api/matches/user-profiles");
       set({ userProfiles: res.data.users });
     } catch (error) {
       set({ userProfiles: [] });
@@ -42,7 +42,7 @@ export const useMatchStore = create((set) => ({
       set({
         swipeFeedback: "passed"
       });
-      await axios.post(`/matches/swipe-left/${user._id}`);
+      await axios.post(`/api/matches/swipe-left/${user._id}`);
     } catch (error) {
       console.log(error);
       toast.error("Failed to swipe left");
@@ -55,7 +55,7 @@ export const useMatchStore = create((set) => ({
       set({
         swipeFeedback: "liked"
       });
-      await axios.post(`/matches/swipe-right/${user._id}`);
+      await axios.post(`/api/matches/swipe-right/${user._id}`);
     } catch (error) {
       console.log(error.response?.data?.message);
       toast.error("Failed to swipe right");

@@ -9,7 +9,7 @@ const useUserStore = create((set) => ({
   updateProfile: async (data) => {
     try {
       set({ loading: true });
-      const res = await axios.put("/users/update", data);
+      const res = await axios.put("/api/users/update", data);
       useAuthStore.getState().setAuthUser(res.data.user);
       toast.success("Profile updated successfully");
     } catch (error) {

@@ -17,7 +17,7 @@ export const useMessageStore = create((set) => ({
 					{ _id: Date.now(), sender: useAuthStore.getState().authUser._id, content },
 				],
 			}));
-			const res = await axiosInstance.post("/messages/send", { receiverId, content });
+			const res = await axiosInstance.post("/api/messages/send", { receiverId, content });
 
 		} catch (error) {
 			toast.error(error.response.data.message || "Something went wrong");
@@ -27,7 +27,7 @@ export const useMessageStore = create((set) => ({
 	getMessages: async (userId) => {
 		try {
 			set({ loading: true });
-			const res = await axiosInstance.get(`/messages/conversation/${userId}`);
+			const res = await axiosInstance.get(`/api/messages/conversation/${userId}`);
 			set({ messages: res.data.messages });
 		} catch (error) {
 			console.log(error);

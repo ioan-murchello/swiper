@@ -13,7 +13,7 @@ const ProfilePage = () => {
     authUser.genderPreference || []
   );
   const [image, setImage] = useState(authUser.image || null);
-console.log(image, 'userImage')
+
   const fileInputRef = useRef(null);
 
   const { loading, updateProfile } = useUserStore();
