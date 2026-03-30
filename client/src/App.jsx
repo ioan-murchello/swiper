@@ -13,7 +13,18 @@ function App() {
     checkAuth();
   }, [checkAuth]);
 
-  if (checkingAuth) return null;
+  if (checkingAuth && !authUser) {
+    return (
+      <div
+        className="flex flex-col justify-center items-center min-h-screen w-full bg-gradient-to-br
+		from-red-500 to-pink-500"
+      >
+        <div
+          className={`border-4 border-gray-200 border-t-blue-500 rounded-full size-8 animate-spin`}
+        ></div>
+      </div>
+    );
+  }
 
   return (
     <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
